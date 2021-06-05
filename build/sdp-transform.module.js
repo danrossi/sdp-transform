@@ -549,8 +549,8 @@ defaultInnerOrder = ['i', 'c', 'b', 'a'];
 
 class Writer {
 
-	static write(session, opt) {
-		opts = opts || {};
+	static write(session, opts = {}) {
+		//opts = opts || {};
 	  // ensure certain properties exist
 	  if (session.version == null) {
 	    session.version = 0; // 'v=0' must be there (only defined version atm)
