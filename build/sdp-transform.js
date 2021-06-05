@@ -7,7 +7,8 @@
 	const grammar = {
 	  v: [{
 	    name: 'version',
-	    reg: /^(\d*)$/
+	    reg: /^(\d*)$/,
+	    format: '%s'
 	  }],
 	  o: [{
 	    // o=- 20518 0 IN IP4 203.0.113.1
