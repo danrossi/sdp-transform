@@ -56,8 +56,9 @@ class Parser {
 
   static parse(sdp) {
     const session = {}
-      , media = []
-      , location = session; // points at where properties go under (one of the above)
+      , media = []; // points at where properties go under (one of the above)
+
+    let location = session;
 
     // parse lines we understand
     sdp.split(/(\r\n|\r|\n)/).filter(validLine).forEach((l) => {
