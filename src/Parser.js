@@ -62,6 +62,8 @@ class Parser {
 
     let location = session;
 
+   // console.log(sdp.split(/(\r\n|\r|\n)/).filter(validLine));
+
     // parse lines we understand
     sdp.split(/(\r\n|\r|\n)/).filter(validLine).forEach((l) => {
       const type = l[0],
@@ -72,7 +74,9 @@ class Parser {
         location = media[media.length-1]; // point at latest media line
       }
 
+      
       for (let j = 0; j < (grammar[type] || []).length; j += 1) {
+
         const obj = grammar[type][j];
 
         if (obj.reg.test(content)) {

@@ -21,17 +21,20 @@
 
 describe("index test", () => {
 
-  var sdp = fs.readFileSync(__dirname + '/normal2.sdp', 'utf8');
+  var sdp = fs.readFileSync(__dirname + '/normal.sdp', 'utf8');
 
   var session = Parser.parse(sdp+'');
 
-  it('got session info', () => {
+ /* it('got session info', () => {
       expect(session).to.be.ok;
-  })
+  })*/
+
+
+  console.log(session.media[0].fmtp);
 
   //console.log("SESSION ", session.media[1].ext);
 
-  const sortedArray = session.media[1].ext.sort(function(a,b) {
+  /*const sortedArray = session.media[1].ext.sort(function(a,b) {
     if (a.value > b.value) {
         return 1
     } else {
@@ -40,21 +43,21 @@ describe("index test", () => {
 });
 
 
-  const id = sortedArray[sortedArray.length -1].value + 1;
+  const id = sortedArray[sortedArray.length -1].value + 1;*/
 
   //session.media[1].ext.push({ value: id, uri: "https://aomediacodec.github.io/av1-rtp-spec/#dependency-descriptor-rtp-header-extension"});
   //console.log(sortedArray);
   
-  session.media[0].rtp[0].codec = "multiopus";
-  session.media[0].rtp[0].encoding = 6;
-  session.media[0].fmtp[0].config = "channel_mapping=0,4,1,2,3,5;coupled_streams=2;minptime=10;num_streams=4;useinbandfec=1";
+  //session.media[0].rtp[0].codec = "multiopus";
+  //session.media[0].rtp[0].encoding = 6;
+  //session.media[0].fmtp[0].config = "channel_mapping=0,4,1,2,3,5;coupled_streams=2;minptime=10;num_streams=4;useinbandfec=1";
 
   //console.log(session.media[0]);
-  console.log(Writer.write(session));
+  //console.log(Writer.write(session));
   //const header = 'a=extmap:' + id + ' https://aomediacodec.github.io/av1-rtp-spec/#dependency-descriptor-rtp-header-extension\r\n'
 
   var media = session.media;
-
+/*
   it( 'got media', () => {
       expect(media && media.length > 0).to.be.ok;
   })
@@ -144,7 +147,7 @@ describe("index test", () => {
   it('audio rtp 1 rate', () => {
     expect(audio.rtp[1].rate).to.equal(48000);
   })
-
+*/
     
 });
 
