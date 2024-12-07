@@ -37,7 +37,9 @@ function parseReg(obj, location, content) {
 }
 
 
+
 const validLine = RegExp.prototype.test.bind(/^([a-z])=(.*)/);
+
 
 function paramReducer(acc, expr) {
   const s = expr.split(/=(.+)/, 2);

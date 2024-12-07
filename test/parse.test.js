@@ -1,18 +1,133 @@
-var fs = require('co-fs')
-  , test = require('bandage')
-  , main = require('..')
+
+  /*, main = require('..')
   , parse = main.parse
   , write = main.write
   , parseFmtpConfig = main.parseFmtpConfig
   , parseParams = main.parseParams
   , parseImageAttributes = main.parseImageAttributes
   , parseSimulcastStreamList = main.parseSimulcastStreamList
-  ;
+  ;*/
+  import fs from "fs";
+
+  import { expect } from "chai"
+  import { Parser } from '../src/Parser';
+
+  var parseFmtpConfig = Parser.parseFmtpConfig
+  , parseParams = Parser.parseParams
+  , parseImageAttributes = Parser.parseImageAttributes
+  , parseSimulcastStreamList = Parser.parseSimulcastStreamList;
+
+
+describe("index test", () => {
+
+  var sdp = fs.readFileSync(__dirname + '/normal.sdp', 'utf8');
+
+  var session = Parser.parse(sdp+'');
+
+  it('got session info', () => {
+      expect(session).to.be.ok;
+  })
+
+  var media = session.media;
+
+  it( 'got media', () => {
+      expect(media && media.length > 0).to.be.ok;
+  })
+
+  it('origin username', () => {
+    expect(session.origin.username).to.equal('-');
+  })
+
+  it('session.origin.sessionId', () => {
+    expect(session.origin.username).to.equal(20518);
+  })
+
+  it('origin sessionVersion', () => {
+    expect(session.origin.sessionVersion).to.equal(0);
+  })
+
+  it('origin netType', () => {
+    expect(session.origin.netType).to.equal('IN');
+  })
+
+  it('origin ipVer', () => {
+    expect(session.origin.ipVer).to.equal(4);
+  })
+
+  it('origin address', () => {
+    expect(session.origin.address).to.equal('203.0.113.1');
+  })
+
+
+  it('session connect ip', () => {
+    expect(session.connection.ip).to.equal('203.0.113.1');
+  })
+
+  it('session connect ip ver', () => {
+    expect(session.connection.version).to.equal(4);
+  })
+
+   // global ICE and fingerprint
+  it('global ufrag', () => {
+    expect(session.iceUfrag).to.equal('F7gI');
+  })
+
+  it('global pwd', () => {
+    expect(session.icePwd).to.equal('x9cml/YzichV2+XlhiMu8g');
+  })
+
+
+
+  var audio = media[0];
+
+  it('audio type', () => {
+    expect(audio.type).to.equal('audio');
+  })
+
+  it('audio port', () => {
+    expect(audio.port).to.equal(54400);
+  })
+
+  it('audio protocol', () => {
+    expect(audio.protocol).to.equal('RTP/SAVPF');
+  })
+
+  it('audio direction', () => {
+    expect(audio.direction).to.equal('sendrecv');
+  })
+
+  it('audio rtp 0 payload', () => {
+    expect(audio.rtp[0].payload).to.equal(0);
+  })
+
+  it('audio rtp 0 codec', () => {
+    expect(audio.rtp[0].codec).to.equal('PCMU');
+  })
+
+  it('audio rtp 0 rate', () => {
+    expect(audio.rtp[0].rate).to.equal(8000);
+  })
+
+  it('audio rtp 1 payload', () => {
+    expect(audio.rtp[1].payload).to.equal(96);
+  })
+
+  it('audio rtp 1 codec', () => {
+    expect(audio.rtp[1].codec).to.equal('opus');
+  })
+
+  it('audio rtp 1 rate', () => {
+    expect(audio.rtp[1].rate).to.equal(48000);
+  })
+
+    
+});
+
 
 test('normalSdp', function *(t) {
   var sdp = yield fs.readFile(__dirname + '/normal.sdp', 'utf8');
 
-  var session = parse(sdp+'');
+  
   t.ok(session, 'got session info');
   var media = session.media;
   t.ok(media && media.length > 0, 'got media');
