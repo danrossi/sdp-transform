@@ -1,7 +1,8 @@
 const grammar = {
   v: [{
     name: 'version',
-    reg: /^(\d*)$/
+    reg: /^(\d*)$/,
+    format: '%d'
   }],
   o: [{
     // o=- 20518 0 IN IP4 203.0.113.1
@@ -181,7 +182,8 @@ const grammar = {
     {
       // a=sendrecv
       name: 'direction',
-      reg: /^(sendrecv|recvonly|sendonly|inactive)/
+      reg: /^(sendrecv|recvonly|sendonly|inactive)/,
+      format: '%s'
     },
     {
       // a=ice-lite
@@ -292,7 +294,8 @@ const grammar = {
     {
       // a=rtcp-mux
       name: 'rtcpMux',
-      reg: /^(rtcp-mux)/
+      reg: /^(rtcp-mux)/,
+      format: '%s'
     },
     {
       // a=rtcp-rsize

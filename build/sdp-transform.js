@@ -7,7 +7,8 @@
 	const grammar = {
 	  v: [{
 	    name: 'version',
-	    reg: /^(\d*)$/
+	    reg: /^(\d*)$/,
+	    format: '%d'
 	  }],
 	  o: [{
 	    // o=- 20518 0 IN IP4 203.0.113.1
@@ -187,7 +188,8 @@
 	    {
 	      // a=sendrecv
 	      name: 'direction',
-	      reg: /^(sendrecv|recvonly|sendonly|inactive)/
+	      reg: /^(sendrecv|recvonly|sendonly|inactive)/,
+	      format: '%s'
 	    },
 	    {
 	      // a=ice-lite
@@ -298,7 +300,8 @@
 	    {
 	      // a=rtcp-mux
 	      name: 'rtcpMux',
-	      reg: /^(rtcp-mux)/
+	      reg: /^(rtcp-mux)/,
+	      format: '%s'
 	    },
 	    {
 	      // a=rtcp-rsize
@@ -537,6 +540,7 @@
 	  } else {
 	    args.push(location[obj.name]);
 	  }
+
 	  return format.apply(null, args);
 	}
 	// RFC specified order
@@ -547,6 +551,7 @@
 	  'b', 't', 'r', 'z', 'a'
 	],
 	defaultInnerOrder = ['i', 'c', 'b', 'a'];
+
 
 
 	class Writer {
@@ -570,11 +575,15 @@
 		  innerOrder = opts.innerOrder || defaultInnerOrder,
 		  sdp = [];
 
+		  
+
 		  // loop through outerOrder for matching properties on session
 		  outerOrder.forEach((type) => {
 
 		    grammar[type].forEach((obj) => {
 
+
+			
 		      if (obj.name in session && session[obj.name] != null) {
 		        sdp.push(makeLine(type, obj, session));
 		      }
@@ -604,6 +613,8 @@
 		      });
 		    });
 		  });
+
+		  
 
 		  return sdp.join('\r\n') + '\r\n';
 		}

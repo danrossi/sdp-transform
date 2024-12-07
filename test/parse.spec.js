@@ -30,7 +30,7 @@ describe("index test", () => {
   })*/
 
 
-  console.log(session.media[0].fmtp);
+  console.log(session);
 
   //console.log("SESSION ", session.media[1].ext);
 
@@ -53,7 +53,7 @@ describe("index test", () => {
   //session.media[0].fmtp[0].config = "channel_mapping=0,4,1,2,3,5;coupled_streams=2;minptime=10;num_streams=4;useinbandfec=1";
 
   //console.log(session.media[0]);
-  //console.log(Writer.write(session));
+  console.log("new sdp", Writer.write(session));
   //const header = 'a=extmap:' + id + ' https://aomediacodec.github.io/av1-rtp-spec/#dependency-descriptor-rtp-header-extension\r\n'
 
   var media = session.media;
