@@ -136,7 +136,8 @@
 	    {
 	      // a=extmap-allow-mixed
 	      name: 'extmapAllowMixed',
-	      reg: /^(extmap-allow-mixed)/
+	      reg: /^(extmap-allow-mixed)/,
+	      format: '%s'
 	    },
 	    {
 	      // a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:PS1uQCVeeCFCanVmcjkpPywjNWhcYD0mXXtxaVBR|2^20|1:32
@@ -194,8 +195,9 @@
 	    {
 	      // a=ice-lite
 	      name: 'icelite',
-	      reg: /^(ice-lite)/
-	    },
+	      reg: /^(ice-lite)/,
+	      format: '%s'
+	    },    
 	    {
 	      // a=ice-ufrag:F7gI
 	      name: 'iceUfrag',
@@ -306,7 +308,8 @@
 	    {
 	      // a=rtcp-rsize
 	      name: 'rtcpRsize',
-	      reg: /^(rtcp-rsize)/
+	      reg: /^(rtcp-rsize)/,
+	      format: '%s'
 	    },
 	    {
 	      // a=sctpmap:5000 webrtc-datachannel 1024
@@ -540,7 +543,6 @@
 	  } else {
 	    args.push(location[obj.name]);
 	  }
-
 	  return format.apply(null, args);
 	}
 	// RFC specified order
@@ -551,7 +553,6 @@
 	  'b', 't', 'r', 'z', 'a'
 	],
 	defaultInnerOrder = ['i', 'c', 'b', 'a'];
-
 
 
 	class Writer {
@@ -575,15 +576,11 @@
 		  innerOrder = opts.innerOrder || defaultInnerOrder,
 		  sdp = [];
 
-		  
-
 		  // loop through outerOrder for matching properties on session
 		  outerOrder.forEach((type) => {
 
 		    grammar[type].forEach((obj) => {
 
-
-			
 		      if (obj.name in session && session[obj.name] != null) {
 		        sdp.push(makeLine(type, obj, session));
 		      }
@@ -613,8 +610,6 @@
 		      });
 		    });
 		  });
-
-		  
 
 		  return sdp.join('\r\n') + '\r\n';
 		}

@@ -130,7 +130,8 @@ const grammar = {
     {
       // a=extmap-allow-mixed
       name: 'extmapAllowMixed',
-      reg: /^(extmap-allow-mixed)/
+      reg: /^(extmap-allow-mixed)/,
+      format: '%s'
     },
     {
       // a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:PS1uQCVeeCFCanVmcjkpPywjNWhcYD0mXXtxaVBR|2^20|1:32
@@ -188,8 +189,9 @@ const grammar = {
     {
       // a=ice-lite
       name: 'icelite',
-      reg: /^(ice-lite)/
-    },
+      reg: /^(ice-lite)/,
+      format: '%s'
+    },    
     {
       // a=ice-ufrag:F7gI
       name: 'iceUfrag',
@@ -300,7 +302,8 @@ const grammar = {
     {
       // a=rtcp-rsize
       name: 'rtcpRsize',
-      reg: /^(rtcp-rsize)/
+      reg: /^(rtcp-rsize)/,
+      format: '%s'
     },
     {
       // a=sctpmap:5000 webrtc-datachannel 1024
