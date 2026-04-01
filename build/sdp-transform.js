@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.SdpTransform = {}));
-}(this, (function (exports) { 'use strict';
+})(this, (function (exports) { 'use strict';
 
 	const grammar = {
 	  v: [{
@@ -765,6 +765,4 @@
 	exports.Parser = Parser;
 	exports.Writer = Writer;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+}));
